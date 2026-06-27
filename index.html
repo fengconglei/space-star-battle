@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>太空星际大战</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-wrap" aria-label="太空星际大战游戏区">
+        <canvas id="gameCanvas" width="430" height="760"></canvas>
+        <div class="hud">
+          <div>
+            <span class="label">关卡</span>
+            <strong id="levelText">1</strong>
+          </div>
+          <div>
+            <span class="label">能量</span>
+            <strong id="healthText">100</strong>
+          </div>
+          <div>
+            <span class="label">分数</span>
+            <strong id="scoreText">0</strong>
+          </div>
+          <div>
+            <span class="label">知识</span>
+            <strong id="factText">0/3</strong>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="startBtn" type="button">开始任务</button>
+          <button id="soundBtn" type="button" aria-pressed="true">音效开</button>
+        </div>
+        <div class="touch-controls" aria-label="竖屏触控操作">
+          <button type="button" data-key="arrowup" aria-label="向上">▲</button>
+          <button type="button" data-key="arrowleft" aria-label="向左">◀</button>
+          <button type="button" data-key=" " class="fire-btn" aria-label="发射">●</button>
+          <button type="button" data-key="arrowright" aria-label="向右">▶</button>
+          <button type="button" data-key="arrowdown" aria-label="向下">▼</button>
+        </div>
+      </section>
+
+      <aside class="mission-panel" aria-label="任务信息">
+        <h1>太空星际大战</h1>
+        <p id="missionText">竖屏驾驶飞船探索太阳、地球、月亮和太阳系，收集知识胶囊，学习简单太空常识。</p>
+        <div class="planet-card">
+          <span id="planetIcon" class="planet-icon"></span>
+          <div>
+            <span class="label">当前星球</span>
+            <h2 id="planetName">太阳能量站</h2>
+            <p id="planetFact">太阳是一颗恒星，它给地球带来光和热。</p>
+          </div>
+        </div>
+        <div class="tips">
+          <span>WASD / 方向键 / 屏幕按钮移动</span>
+          <span>空格 / 圆形按钮发射</span>
+          <span>收集发光知识胶囊可解锁闯关题</span>
+        </div>
+      </aside>
+    </main>
+
+    <div id="quizModal" class="modal" hidden>
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+        <span class="label">星际知识闯关</span>
+        <h2 id="quizTitle">准备进入下一关</h2>
+        <p id="quizQuestion"></p>
+        <div id="quizOptions" class="quiz-options"></div>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
