@@ -1,0 +1,294 @@
+:root {
+  color-scheme: dark;
+  --bg: #071016;
+  --panel: rgba(13, 29, 36, 0.88);
+  --line: rgba(154, 210, 210, 0.28);
+  --text: #edf9f9;
+  --muted: #9fb8b8;
+  --accent: #49d3c8;
+  --gold: #ffd166;
+  --danger: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(73, 211, 200, 0.18), transparent 24rem),
+    radial-gradient(circle at 84% 20%, rgba(255, 209, 102, 0.13), transparent 22rem),
+    linear-gradient(145deg, #061015 0%, #0b1721 45%, #10131b 100%);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.2px),
+    radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 1.4px);
+  background-size: 90px 90px, 140px 140px;
+  background-position: 0 0, 36px 28px;
+  opacity: .45;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.game-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 43 / 76;
+  max-height: min(72vh, 760px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #050b12;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .34);
+}
+
+.hud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  pointer-events: none;
+}
+
+.hud > div,
+.planet-card,
+.tips,
+.mission-panel {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(14px);
+}
+
+.hud > div {
+  min-height: 48px;
+  border-radius: 8px;
+  padding: 7px 8px;
+}
+
+.label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+strong {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.controls {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 92px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  border: 1px solid rgba(73, 211, 200, .45);
+  border-radius: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  color: var(--text);
+  background: rgba(20, 50, 56, .82);
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:hover,
+button:focus-visible {
+  outline: none;
+  background: rgba(50, 98, 98, .92);
+}
+
+.mission-panel {
+  border-radius: 8px;
+  padding: 14px;
+  order: -1;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: clamp(26px, 8vw, 38px);
+  line-height: 1.05;
+}
+
+.mission-panel > p,
+.planet-card p {
+  color: #c6d9d9;
+  line-height: 1.65;
+}
+
+.planet-card {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 12px;
+  align-items: center;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.planet-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 26%, #ffd0a8 0 12%, #d65c43 34%, #7d2e35 68%, #35131a 100%);
+  box-shadow: 0 0 30px rgba(255, 107, 107, .34);
+}
+
+.planet-card h2 {
+  margin: 2px 0 6px;
+  font-size: 19px;
+}
+
+.tips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  border-radius: 8px;
+  padding: 12px;
+  color: #d6e8e8;
+  font-size: 14px;
+}
+
+.touch-controls {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.touch-controls button {
+  min-width: 0;
+  min-height: 58px;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 700;
+  background: rgba(15, 38, 45, .86);
+}
+
+.touch-controls .fire-btn {
+  color: #171205;
+  background: linear-gradient(180deg, #ffe59a, #ffd166);
+  border-color: rgba(255, 209, 102, .9);
+}
+
+.modal {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(2, 5, 9, .72);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-box {
+  width: min(520px, 100%);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  background: rgba(10, 24, 31, .96);
+  box-shadow: 0 24px 80px rgba(0,0,0,.45);
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-options button {
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+  line-height: 1.35;
+  padding: 12px 14px;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding: 12px;
+  }
+
+  canvas {
+    max-height: none;
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    background:
+      radial-gradient(circle at 22% 8%, rgba(73, 211, 200, 0.16), transparent 18rem),
+      linear-gradient(145deg, #061015 0%, #10131b 100%);
+  }
+
+  .app-shell {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .mission-panel > p {
+    display: none;
+  }
+
+  .tips {
+    font-size: 12px;
+  }
+
+  .controls {
+    bottom: 86px;
+  }
+
+  .touch-controls button {
+    min-height: 52px;
+  }
+}
